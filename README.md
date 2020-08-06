@@ -34,14 +34,10 @@ you're using an emulator that requires a bios, such as PS1 or Dreamcast.
 For some small optimisations, if your screen has black borders around the edges, you can modify this by 
 exiting EmulationStation (Start Button -> Quit -> Quit EmulationStation -> Yes), which will leave you in 
 the terminal. Type:
-```
-sudo nano /boot/config.txt"
-```
+```sudo nano /boot/config.txt"```
 And find the line "disable_overscan=0". The number may be different, but experiment with adjusting this 
 value (changing this to 1 fixed any black borders for my setup) and rebooting by typing:
-```
-reboot
-```
+```reboot```
 
 # Step 3 - Setting up a USB for PS2 Games
 
@@ -51,20 +47,42 @@ larger than 4GB will need to be split into parts. This USB needs folders in the 
 specified [here](https://bitbucket.org/ShaolinAssassin/open-ps2-loader-0.9.3-documentation-project/wiki/tree-structure). 
 You can do this by plugging the USB into the PS2 and launching OPL to create the directory paths or manually. 
 
-After this, plug the USB into your Raspberry Pi and enter the terminal by quitting EmulationStation. Once in the 
-terminal, type: 
-```
-sudo nano /etc/dhcpcd.conf
-```
-And find the eth0 setting. These should be commented out by default. Uncomment the following lines to look something like this:
+After this, plug the USB into your Raspberry Pi and enter the terminal by quitting EmulationStation. 
+
+# Step 4 - Setting up the Raspberry Pi to share PS2 Games over ethernet
+
+Once in the terminal, type: 
+```sudo nano /etc/dhcpcd.conf```
+And find the eth0 setting. These should be commented out by default. Uncomment the following lines to look 
+something like this:
 ```
 interface eth0
 static ip_address=192.168.20.10/24
 static routers=192.168.20.1
 static domain_name_servers=192.168.20.1
 ```
-Do note that the specific numbers will be different for your case. Ensure that ip_address is a unique number. After this, 
-reboot the system with: 
-```
-reboot
-```
+To exit, press Ctrl+X -> Y -> Enter
+
+Do note that the specific numbers will be different for your case. Ensure that ip_address is a unique number. 
+
+After this, reboot the system with: 
+```reboot```
+
+After this, we need to enter the terminal again. Once in, we need to find our USB. Type:
+```sudo fdisk -l```
+Multiple entries will appear. Generally the last one is the USB. Looking at the Device boot column, you'll see 
+the path to the device, in most cases being **/dev/sda1**.
+
+Next we need to create a folder to mount the drive which can done with a command like:
+```sudo mkdir /media/PS2SMB```
+
+We also need to modify the stab config file which can be done with the command:
+```sudo nano /etc/fstab```
+Then after the last entry, add a newline and add the following line: 
+```/dev/sda1 /media/PS2SMB ntfs default,nofail 0 0```
+To exit, press Ctrl+X -> Y -> Enter.\
+After this, reboot the system with: 
+```reboot```
+
+We need to do one last thing, which is to setup the Samba server to make our Raspberry Pi act as a server.
+Samba is already installed in RetroPie, and we need to simply add some lines to the config. To do this, type 
