@@ -8,7 +8,7 @@ Firstly, download the latest image of [RetroPie](https://retropie.org.uk/downloa
 Format your micro SD card to FAT32. If it's larger than 
 32GB, you'll have to use a tool like [guiformat](http://www.ridgecrop.demon.co.uk/index.htm?guiformat.htm) to do this.\
 After formatting, use [Balena Etcher](https://www.balena.io/etcher/) and select the RetroPie iso you downloaded earlier with the micro SD card. This will take a couple minutes. It's recommended to have an 8GB or larger micro SD card.\
-After this is done, you've set up the SD card!\
+After this is done, you've set up the SD card!
 
 # Step 2 - Configuring RetroPie
 
