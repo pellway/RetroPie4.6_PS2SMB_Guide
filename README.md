@@ -4,7 +4,7 @@ This guide is to have a working RetroPie setup whilst also using PS2SMB network
 share to play PlayStation 2 games via ethernet. This guide also requires your 
 PS2 to have a memory card flashed with FreeMCBoot and OPL.
 
-# Step 1 - Preparing the SD Card
+### Step 1 - Preparing the SD Card
 
 Firstly, download the latest image of [RetroPie](https://retropie.org.uk/download/) and extract the iso file.
 
@@ -17,7 +17,7 @@ to have an 8GB or larger micro SD card.
 
 After this is done, you've set up the SD card!
 
-# Step 2 - Configuring RetroPie
+### Step 2 - Configuring RetroPie
 
 Slot the micro SD card into the Raspberry Pi 4 and connect the display, power and a controller.
 For HDMI audio, only one of the ports supports this. Turn the power on and you should see 4 raspberries 
@@ -39,7 +39,7 @@ And find the line "disable_overscan=0". The number may be different, but experim
 value (changing this to 1 fixed any black borders for my setup) and rebooting by typing:
 ```reboot```
 
-# Step 3 - Setting up a USB for PS2 Games
+### Step 3 - Setting up a USB for PS2 Games
 
 For this, you'll need a fairly large USB formatted to NTFS format. As PS2 games tend to be around the 4GB 
 mark, a larger USB helps store more games. Technically you could do this with a FAT32 usb, but games 
@@ -49,7 +49,7 @@ You can do this by plugging the USB into the PS2 and launching OPL to create the
 
 After this, plug the USB into your Raspberry Pi and enter the terminal by quitting EmulationStation. 
 
-# Step 4 - Setting up the Raspberry Pi to share PS2 Games over ethernet
+### Step 4 - Setting up the Raspberry Pi to share PS2 Games over ethernet
 
 Once in the terminal, type: 
 ```sudo nano /etc/dhcpcd.conf```
@@ -114,7 +114,7 @@ To exit, press Ctrl+X -> Y -> Enter. After editing, you can check whether your s
 After this, restart the samba server using command:
 ```sudo service smbd restart```
 
-# Step 5 - Setting up OPL on the PS2
+### Step 5 - Setting up OPL on the PS2
 
 Connect your Raspberry Pi 4 and PS2 together using an ethernet cable and turn on the PS2. With the Free McBoot 
 memory card, open OPL and open up Network config. From here change the settings to the following:
@@ -139,6 +139,6 @@ After this, you should be done! There is potentially lots that can be improved h
 I have left out some explanations for the sake of a straight-forward clean guide, but may of missed some logic and reason. 
 Enjoy your PS2 games on accurate hardware and with no noticable downsides in load times or accuracy.
 
-# Notes
+### Notes
 
 Is USB auto mount neccessary?
