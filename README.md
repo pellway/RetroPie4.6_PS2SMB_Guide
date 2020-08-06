@@ -53,7 +53,7 @@ After this, plug the USB into your Raspberry Pi and enter the terminal by quitti
 
 Once in the terminal, type: 
 ```sudo nano /etc/dhcpcd.conf```
-And find the eth0 setting. These should be commented out by default. Uncomment the following lines to look 
+and find the eth0 setting. These should be commented out by default. Uncomment the following lines to look 
 something like this:
 ```
 interface eth0
@@ -80,9 +80,65 @@ We also need to modify the stab config file which can be done with the command:
 ```sudo nano /etc/fstab```
 Then after the last entry, add a newline and add the following line: 
 ```/dev/sda1 /media/PS2SMB ntfs default,nofail 0 0```
-To exit, press Ctrl+X -> Y -> Enter.\
+
+To exit, press Ctrl+X -> Y -> Enter.
+
 After this, reboot the system with: 
 ```reboot```
 
 We need to do one last thing, which is to setup the Samba server to make our Raspberry Pi act as a server.
-Samba is already installed in RetroPie, and we need to simply add some lines to the config. To do this, type 
+Samba is already installed in RetroPie, and we need to simply add some lines to the config. To do this, in the terminal type:
+```sudo nano /etc/samba/smb.conf```
+Under the ```[global]``` header, add the lines:
+```
+lanman auth = yes
+keepalive = 0
+```
+and at the very bottom add the following chunk:
+```
+[PS2SMB]
+comment = PS2 folder
+path = /media/PS2SMB
+browseable = yes
+writeable = yes
+only guest = no
+guest ok = yes
+create mask = 0777
+directory mask = 0777
+public = yes
+```
+
+To exit, press Ctrl+X -> Y -> Enter. After editing, you can check whether your syntax is correct using command:
+```testparm```
+
+After this, restart the samba server using command:
+```sudo service smbd restart```
+
+# Step 5 - Setting up OPL on the PS2
+
+Connect your Raspberry Pi 4 and PS2 together using an ethernet cable and turn on the PS2. With the Free McBoot 
+memory card, open OPL and open up Network config. From here change the settings to the following:
+```
+PS2
+IP Address Type: Static
+IP Address: 192.168.20.xx
+Mask: 255.255.255.0
+Gateway: 192.168.20.10
+DNS: 192.168.20.10
+
+SMB Server
+Address Type: IP
+IP Address: 192.168.20.10
+Share: PS2SMB
+User: guest
+```
+
+
+
+# NOTES
+
+Is USB auto mount neccessary?
+Samba 
+
+
+
