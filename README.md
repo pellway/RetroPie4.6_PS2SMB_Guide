@@ -132,13 +132,13 @@ IP Address: 192.168.20.10
 Share: PS2SMB
 User: guest
 ```
+After this, press connect and exit. In the settings menu, you can also select **ETH device start mode** to **Auto** and 
+**Default menu** to **ETH games** to automatically open up the games shared over ethernet. After this select **Save changes**.
 
+After this, you should be done! There is potentially lots that can be improved here and maybe some inefficiencies are present. 
+I have left out some explanations for the sake of a straight-forward clean guide, but may of missed some logic and reason. 
+Enjoy your PS2 games on accurate hardware and with no noticable downsides in load times or accuracy.
 
-
-# NOTES
+# Notes
 
 Is USB auto mount neccessary?
-Samba 
-
-
-
