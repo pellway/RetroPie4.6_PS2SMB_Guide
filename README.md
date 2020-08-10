@@ -132,6 +132,9 @@ IP Address: 192.168.20.10
 Share: PS2SMB
 User: guest
 ```
+For the PS2's IP Address, the last numbers can be any unique number. As long as it doesn't share the same IP with another device 
+on your network, anything goes. 
+
 After this, press connect and exit. In the settings menu, you can also select **ETH device start mode** to **Auto** and 
 **Default menu** to **ETH games** to automatically open up the games shared over ethernet. After this select **Save changes**.
 
